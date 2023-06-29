@@ -37,6 +37,10 @@ function App() {
 
     let [filter, setFilter] = useState<FilterType>('All')
 
+    let changeIsDone = (newId:string, newIsDone:boolean) => {
+
+    }
+
     // Фильтрация тасок по кнопкам
 
     let tasksForTodolist = tasks
@@ -70,6 +74,7 @@ function App() {
                       tasks={tasksForTodolist}
                       removeTask={removeTask}
                       addTask={addTask}
+                      changeIsDone={changeIsDone}
             />
 
         </div>

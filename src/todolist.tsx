@@ -7,12 +7,14 @@ type PropsType = {
     changeFilter: (value: FilterType) => void
     removeTask: (id: string) => void
     addTask: (title: string) => void
+    changeIsDone: (newId:string, newIsDone: boolean) => void
 }
 
 
 export const Todolist = (props: PropsType) => {
     // localstate for newtitle todolist
     let [newTaskTitle, setNewTaskTitle] = useState('')
+
     // считывание значение input
     let changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setNewTaskTitle(e.currentTarget.value)
@@ -24,6 +26,7 @@ export const Todolist = (props: PropsType) => {
         }
         setNewTaskTitle('')
     }
+
 
 
     return (
@@ -40,9 +43,12 @@ export const Todolist = (props: PropsType) => {
                         const onRemoveHandler = () => {
                             props.removeTask(task.id)
                         }
+                        const changeIsDoneHandler = (e:ChangeEvent<HTMLInputElement>) => {
+                            props.changeIsDone(task.id, e.currentTarget.checked)
+                        }
                         return (
                             <li key={task.id}>
-                                <input type="checkbox" checked={task.isDone}/>
+                                <input type="checkbox" checked={task.isDone} onChange={changeIsDoneHandler}/>
                                 <span>{task.title}</span>
                                 <button onClick={onRemoveHandler}>X
                                 </button>
