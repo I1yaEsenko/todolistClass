@@ -31,14 +31,17 @@ function App() {
     let [tasks, setTasks] = useState<Array<TasksType>>([
         {id: v1(), title: "HTML&CSS", isDone: true},
         {id: v1(), title: "JS", isDone: true},
-        {id: v1(), title: "ReactJS", isDone: false}
+        {id: v1(), title: "ReactJS", isDone: false},
+        {id: v1(), title: "Angular", isDone: false},
+        {id: v1(), title: "VueJS", isDone: true},
+        {id: v1(), title: "ReactNative", isDone: false}
     ],
         )
 
     let [filter, setFilter] = useState<FilterType>('All')
 
-    let changeIsDone = (newId:string, newIsDone:boolean) => {
-
+    const changeIsDone = (newId:string, newIsDone:boolean) => {
+            setTasks(tasks.map(el=> el.id === newId ? {...el, isDone: newIsDone}:el))
     }
 
     // Фильтрация тасок по кнопкам
@@ -56,13 +59,13 @@ function App() {
     }
 
     //Удаление тасок по Х
-    let removeTask = (id: string) => {
+    const removeTask = (id: string) => {
         let filteredTasks = tasks.filter((t) => t.id !== id)
         setTasks(filteredTasks)
     }
 
     //Добавление тасок
-    let addTask = (title:string) => {
+    const addTask = (title: string) => {
         let newTask = {id: v1(), title: title, isDone: false}
         setTasks([newTask,...tasks])
     }
